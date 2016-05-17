@@ -1,3 +1,3 @@
 # Python-Game
-
-start
+def function(f):
+  print f
