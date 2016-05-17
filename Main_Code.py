@@ -3,9 +3,9 @@ import random
 import numpy
 import time
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
-health = 0
+health = 100
 gold = 0
-
+power = 10
 def start():
     print ("Welcome Adventurer")
     print ("You are about to embark on an epic quest!")
@@ -17,4 +17,7 @@ def start():
 def begin():
     print ("\n\nYour current health is " , health)
     print ("Your current gold count is " , gold)
-    print ("Your objective is to accumulate 500 gold")
+    print ("Your current power is " , power)
+    print ("Your objective is to accumulate 500 gold. You gain gold by slaying enemies. The higher your power, \nthe more damage you will do if your attack hits")
+    
+    
