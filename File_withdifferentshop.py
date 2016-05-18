@@ -1,6 +1,6 @@
 #This is another idea i had for the shop which would take a lot longer. BTW, it isnt finsihed, still have to hardcode everything in
 from __future__ import print_function
-import random
+import random as r
 import numpy
 import time
 import msvcrt as m
@@ -76,7 +76,7 @@ def town():
         town()
 def shop():
     print ("Gold: ", gold)
-    print ("Here is our inventory: \n1.Bronze Chestpiece-Cost: 50g, gives +10 power\n2.Iron Chestpiece-Cost:200g, gives +30 power\n3.Dark Iron Chestpiece-Cost: 2500g, gives +75 power\n4.Bronze Sword-Cost: 50g, gives +10 power\n5.Iron Sword-Cost:200g, gives +30 power\n6.Dark Iron Sword-Cost: 2500g, gives +100 power")
+    print ("Here is our inventory: \n1.Bronze Chestpiece-Cost: ",bronze_chest_value,"g, gives +10 power\n2.Iron Chestpiece-Cost:200g, gives +30 power\n3.Dark Iron Chestpiece-Cost: 2500g, gives +75 power\n4.Bronze Sword-Cost: 50g, gives +10 power\n5.Iron Sword-Cost:200g, gives +30 power\n6.Dark Iron Sword-Cost: 2500g, gives +100 power")
     answer = int(raw_input("Enter the number of the piece of equipment you would like to buy, if you dont want to buy anything, enter the number '7' : "))
     if answer == 1:
         bronze_chest()
@@ -113,5 +113,9 @@ def restore():
     print ("Filler function....")
 def forest():
     print ("Your in a forest")
+    wait()
+    chance = [1:100]
+    monster_num = r.int(chance)
+    print ("The number it picked was : ",monster_num)
 def dragon_fight():
     print ("Your fighting a dragon")
