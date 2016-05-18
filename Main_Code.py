@@ -2,8 +2,11 @@ from __future__ import print_function
 import random
 import numpy
 import time
-import msvcrt as m
+#import msvcrt as m
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
+global health
+global gold
+global power
 health = 100
 gold = 0
 power = 10
@@ -55,7 +58,8 @@ def choose_path_2():
         choose_path_2()
     
 def town():
-    print ("You're in a town. \nHealth: ", health,"\nPower: ",power,"\nGold: ", gold)
+    print ("You're in a town.")
+    display()
     answer = str(raw_input("What would you like to do? Your choices are :\n1.Buy better weapons or armor\n2.Pay to restore health\n3.Leave the town\nEnter which number choice you want: ")).lower()
     if answer == '1':
         print ("You are going to the shop....")
@@ -74,10 +78,35 @@ def town():
         wait()
         town()
 def shop():
-    print ("Filler function....")
+    global power
+    global health
+    global gold
+    curInput = raw_input("Do you want to increase your power? ").lower()
+    if curInput == 'yes':
+        try:
+            curInput = int(raw_input("You're power will increase 5 points for every 15 gold coins you give.\nHow many gold coins do you wish to spend (float inputs will be rounded down). "))
+            power += (curInput/5)
+            gold -= curInput
+            if gold < 1:
+                print("\nYou do not have enough money. Please try again with a lower amount or leave the shop.")
+                gold += curInput
+                shop()
+            display()
+        except ValueError:
+            print("Please enter a number (floats inputs will be rounded down). ")
+            shop()
+    elif curInput == 'no':
+        town()
+    else:
+        print('Invalid Input. Please answer \'yes\' or \'no\'')
+        shop()
+    
 def restore():
     print ("Filler function....")
 def forest():
     print ("Your in a forest")
 def dragon_fight():
     print ("Your fighting a dragon")
+    
+def display():
+    print("\nHealth: ", health,"\nPower: ",power,"\nGold: ", gold)
