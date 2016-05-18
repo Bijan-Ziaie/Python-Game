@@ -11,7 +11,7 @@ health = 100
 gold = 0
 power = 10
 def wait():
-    raw_input("Press Enter to continue...")
+    raw_input("Press any key to continue...")
 def start():
     print ("Welcome Adventurer")
     print ("You are about to embark on an epic quest!")
@@ -100,13 +100,37 @@ def shop():
     else:
         print('Invalid Input. Please answer \'yes\' or \'no\'')
         shop()
-    
+        
 def restore():
     print ("Filler function....")
 def forest():
+    global health
+    global gold
+    global power
     print ("Your in a forest")
+    curInput = raw_input("Do you want to look for monsters? ").lower()
+    if curInput == 'yes':
+        print("Now, you must wait for a monster to show up.")
+        #break
+        time.sleep(random.uniform(2, 5))
+        print("Monster found!")
+        randInt = random.randint(0,100)
+        if randInt > power:
+            print("You lost the battle. You're health will go down.")
+            health -= random.randint(1,10)
+        else:
+            print("You won the battle. You will gain some gold.")
+            gold += random.randint(10, 30)
+        display()
+        wait()
+        forest()
+    elif curInput == 'no':
+        choose_path_2()
+    else:
+        print("Invalid Input. Please enter a yes or a no")
 def dragon_fight():
     print ("Your fighting a dragon")
     
 def display():
     print("\nHealth: ", health,"\nPower: ",power,"\nGold: ", gold)
+
