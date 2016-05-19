@@ -1,7 +1,5 @@
 from __future__ import print_function
 import random as r
-import numpy
-import time
 #import msvcrt as m
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
 global health 
@@ -445,7 +443,7 @@ def dragon_fight():
 def display():
     print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
 
-def chestpowerfix():
+def chestfixpower():
     global chest
     global power
     if chest == 'Bronze':
@@ -455,7 +453,7 @@ def chestpowerfix():
     elif chest == 'Dark Iron':
         power -= dark_iron_chest_power
 
-def swordpowerfix():
+def swordfixpower():
     global sword
     global power
     if sword == 'Bronze':
