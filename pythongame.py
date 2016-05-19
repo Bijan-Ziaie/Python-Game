@@ -142,6 +142,7 @@ def bronze_chest():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_chest_power
         gold -= bronze_chest_value
+        chestfixpower()
         chest = 'Bronze'
         display()
         wait()
@@ -159,6 +160,7 @@ def iron_chest():
         print ("OK, you have now bought: Iron Chestpiece")
         power += iron_chest_power
         gold -= iron_chest_value
+        chestfixpower()
         chest = 'Iron'
         display()
         wait()
@@ -176,6 +178,7 @@ def dark_iron_chest():
         print ("OK, you have now bought: Dark Iron Chestpiece")
         power += dark_iron_chest_power
         gold -= dark_iron_chest_value
+        chestfixpower()
         chest = 'Dark Iron'
         display()
         wait()
@@ -193,6 +196,7 @@ def bronze_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_sword_power
         gold -= bronze_sword_value
+        swordfixpower()
         sword = 'Bronze'
         display()
         wait()
@@ -210,6 +214,7 @@ def iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += iron_sword_power
         gold -= iron_sword_value
+        swordfixpower()
         sword = 'Iron'
         display()
         wait()
@@ -227,6 +232,7 @@ def dark_iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += dark_iron_sword_power
         gold -= dark_iron_sword_value
+        swordfixpower()
         sword = 'Dark Iron'
         display()
         wait()
@@ -438,3 +444,23 @@ def dragon_fight():
 
 def display():
     print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
+
+def chestpowerfix():
+    global chest
+    global power
+    if chest == 'Bronze':
+        power -= bronze_chest_power
+    elif chest == 'Iron':
+        power -= iron_chest_power
+    elif chest == 'Dark Iron':
+        power -= dark_iron_chest_power
+
+def swordpowerfix():
+    global sword
+    global power
+    if sword == 'Bronze':
+        power -= bronze_sword_power
+    elif sword == 'Iron':
+        power -= iron_sword_power
+    elif sword == 'Dark Iron':
+        power -= dark_iron_sword_power
