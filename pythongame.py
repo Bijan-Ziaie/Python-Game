@@ -1,7 +1,7 @@
 from __future__ import print_function
 import random as r
-import sys
 #import msvcrt as m
+print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
 global health 
 global gold 
 global power
@@ -10,7 +10,7 @@ global sword
 global shdwait
 shdwait = True
 health = 100
-gold = 0
+gold = 100
 power = 10
 chest = 'None'
 sword = 'None'
@@ -18,6 +18,7 @@ global mon_even_pow
 global mon_even_health
 global mon_odd_pow
 global mon_odd_health
+
 def wait():
     global shdwait
     if shdwait:
@@ -194,7 +195,7 @@ def bronze_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_sword_power
         gold -= bronze_sword_value
-        swordfixpower()
+        swordpowerfix()
         sword = 'Bronze'
         display()
         wait()
@@ -212,7 +213,7 @@ def iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += iron_sword_power
         gold -= iron_sword_value
-        swordfixpower()
+        swordpowerfix()
         sword = 'Iron'
         display()
         wait()
@@ -230,7 +231,7 @@ def dark_iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += dark_iron_sword_power
         gold -= dark_iron_sword_value
-        swordfixpower()
+        swordpowerfix()
         sword = 'Dark Iron'
         display()
         wait()
@@ -374,7 +375,9 @@ def monster_even():
         print ("You have to click run again")
     if mon_even_health == 0 or mon_even_health < 0:
         print ("You won!")
-        gold += (mon_even_pow*10)
+        goldgain = (mon_even_pow*10)
+        gold += goldgain
+        print ("You gained ", str(mon_even_pow*10),"gold")
         wait()
         display()
         wait()
@@ -452,7 +455,7 @@ def chestfixpower():
     elif chest == 'Dark Iron':
         power -= dark_iron_chest_power
 
-def swordfixpower():
+def swordpowerfix():
     global sword
     global power
     if sword == 'Bronze':
