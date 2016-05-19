@@ -1,10 +1,12 @@
-#This is another idea i had for the shop which would take a lot longer. BTW, it isnt finsihed, still have to hardcode everything in
 from __future__ import print_function
 import random as r
 import numpy
 import time
 import msvcrt as m
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
+global health 
+global gold 
+global power
 health = 100
 gold = 0
 power = 10
@@ -114,8 +116,16 @@ def restore():
 def forest():
     print ("Your in a forest")
     wait()
-    chance = [1:100]
-    monster_num = r.int(chance)
+    monster_num = r.randint(1,100)
     print ("The number it picked was : ",monster_num)
+    if monster_num == 1:
+        treasure_chest()
+    elif monster_num%2 == 0:
+        monster_even()
+def treasure_chest():
+    global gold
+    print ("YOU FOUND A TREASURE!!!!!!!!!")
+    gold += 500
+    print ("Your new gold total is ", gold)
 def dragon_fight():
     print ("Your fighting a dragon")
