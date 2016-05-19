@@ -1,7 +1,7 @@
 from __future__ import print_function
 import random as r
+import sys
 #import msvcrt as m
-print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
 global health 
 global gold 
 global power
