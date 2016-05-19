@@ -2,23 +2,28 @@ from __future__ import print_function
 import random as r
 import numpy
 import time
+#import msvcrt as m
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
 global health 
 global gold 
 global power
 global chest
 global sword
-health = 90
+global shdwait
+shdwait = True
+health = 100
 gold = 100
 power = 10
 chest = 'None'
 sword = 'None'
-global monster_power_even
-global monster_health_even
-global monster_power_odd
-global monster_health_odd
+global mon_even_pow
+global mon_even_health
+global mon_odd_pow
+global mon_odd_health
 def wait():
-    raw_input("Press Enter to continue...")
+    global shdwait
+    if shdwait:
+        raw_input("Press Enter to continue...")
 def start():
     print ("Welcome Adventurer")
     print ("You are about to embark on an epic quest!")
@@ -86,7 +91,6 @@ def town():
         town()
         
 def shop():
-    print("WARNING: IF YOU BUY THE SAME ITEM AGAIN, YOU WILL LOOSE GOLD BUT YOU WILL NOT GAIN ANY POWER")
     print ("Gold: ", gold)
     print ("Here is our inventory:")
     print("1.Bronze Chestpiece:\n\tCost: ", bronze_chest_value, "g\n\tPower: +", bronze_chest_power, sep='')
@@ -138,7 +142,6 @@ def bronze_chest():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_chest_power
         gold -= bronze_chest_value
-        fixpower()
         chest = 'Bronze'
         display()
         wait()
@@ -156,7 +159,6 @@ def iron_chest():
         print ("OK, you have now bought: Iron Chestpiece")
         power += iron_chest_power
         gold -= iron_chest_value
-        fixpower()
         chest = 'Iron'
         display()
         wait()
@@ -174,7 +176,6 @@ def dark_iron_chest():
         print ("OK, you have now bought: Dark Iron Chestpiece")
         power += dark_iron_chest_power
         gold -= dark_iron_chest_value
-        fixpower()
         chest = 'Dark Iron'
         display()
         wait()
@@ -192,7 +193,6 @@ def bronze_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_sword_power
         gold -= bronze_sword_value
-        fixpowersword()
         sword = 'Bronze'
         display()
         wait()
@@ -210,7 +210,6 @@ def iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += iron_sword_power
         gold -= iron_sword_value
-        fixpowersword()
         sword = 'Iron'
         display()
         wait()
@@ -228,7 +227,6 @@ def dark_iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += dark_iron_sword_power
         gold -= dark_iron_sword_value
-        fixpowersword()
         sword = 'Dark Iron'
         display()
         wait()
@@ -314,42 +312,129 @@ def restore():
 def forest():
     print ("Your in a forest")
     wait()
-    monster_num = r.randint(1,100)
+    #monster_num = r.randint(1,100)
+    monster_num = 2
+    print ("The number it picked was : ",monster_num)
     if monster_num == 1:
         treasure_chest()
     elif monster_num%2 == 0:
         monster_even()
-    elif monster_num%2 == 1 and not monster_num == 1:
+    else:
         monster_odd()
 def monster_even():
-    global monster_power_even
-    global monster_health_even
+    global mon_even_pow
+    global mon_even_health
+    global power
+    global health
+    global gold
+    global shdwait
+    mon_even_pow = power/5
+    mon_even_health = health/5
+    print ("You found a small monster!")
+    wait()
+    print("Do you want to go through the fight round by round, or do you want to skip to the end of the fight.")
+    choice = int(raw_input("1.Fight round by round\n2.Skip to end\nChoice: "))
+    if choice == 2:
+        shdwait = False;
+    elif choice != 1 or choice != 2:
+        print("Invalid Input, please enter again")
+        monster_even()
+    while health > 0 and mon_even_health > 0:
+        player_hit = r.randint(1,5)
+        mon_hit = r.randint(1,5)
+        print(player_hit)
+        print(mon_hit)
+        print("Monster Health: ", mon_even_health)
+        print("Your Health: ", health)
+        wait()
+        if player_hit != 4:
+            mon_even_health -= 5*(power/20.)
+            dmg = 5*(power/20.)
+            print ("You did ",dmg," damage to the small monster")
+            wait()
+        else:
+            print("Your attack missed!")
+            wait()
+        if mon_hit != 4 and mon_hit != 3:
+            health -= (power/20.)
+            mon_dmg = (power/20.)
+            print ("The small monster did ",mon_dmg," damage to you")
+            wait()
+        else:
+            print ("The small monster's attack missed!")
+            wait()
+    shdwait = True
+    if health <= 0:
+        print ("You lose!")
+        wait()
+        print ("You can try again next time Mr.Alleman")
+        print ("You have to click run again")
+    if mon_even_health == 0 or mon_even_health < 0:
+        print ("You won!")
+        gold += (mon_even_pow*10)
+        wait()
+        display()
+        wait()
+        choose_path()
+def monster_odd():
+    global mon_odd_pow
+    global mon_odd_health
+    global power
+    global health
+    global gold
+    global shdwait
+    mon_odd_pow = power/3
+    mon_odd_health = health/3
+    print ("You found a large monster!")
+    wait()
+    print("Do you want to go through the fight round by round, or do you want to skip to the end of the fight.")
+    choice = int(raw_input("1.Fight round by round\n2.Skip to end\nChoice: "))
+    if choice == 2:
+        shdwait = False;
+    elif choice != 1 or choice != 2:
+        print("Invalid Input, please enter again")
+        monster_even()
+    while health > 0 and mon_odd_health > 0:
+        player_hit = r.randint(1,5)
+        mon_hit = r.randint(1,5)
+        print(player_hit)
+        print(mon_hit)
+        print("Monster Health: ", mon_odd_health)
+        print("Your Health: ", health)
+        wait()
+        if player_hit != 4:
+            mon_odd_health -= 5*(power/20.)
+            dmg = 5*(power/20.)
+            print ("You did ",dmg," damage to the large monster")
+            wait()
+        else:
+            print("Your attack missed!")
+            wait()
+        if mon_hit != 6:
+            health -= (5/3)(power/20.)
+            mon_dmg = (5/3)(power/20.)
+            print ("The large monster did ",mon_dmg," damage to you")
+            wait()
+    shdwait = True
+    if health <= 0:
+        print ("You lose!")
+        wait()
+        print ("You can try again next time Mr.Alleman")
+        print ("You have to click run again")
+    if mon_odd_health == 0 or mon_odd_health < 0:
+        print ("You won!")
+        gold += (mon_odd_pow*10)
+        wait()
+        display()
+        wait()
+        choose_path()
 def treasure_chest():
     global gold
     print ("YOU FOUND A TREASURE!!!!!!!!!")
     gold += 500
     print ("Your new gold total is ", gold)
-    wait()
-    forest()
 def dragon_fight():
     print ("Your fighting a dragon")
+
 def display():
     print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
-def fixpower():
-    global power
-    global chest
-    if chest == 'Bronze':
-        power -= bronze_chest_power
-    elif chest == 'Iron':
-        power -= iron_chest_power
-    elif chest == 'Dark Iron':
-        power -= dark_iron_chest_power
-def fixpowersword():
-    global power
-    global sword
-    if sword == 'Bronze':
-        power -= bronze_sword_power
-    elif sword == 'Iron':
-        power -= iron_sword_power
-    elif sword == 'Dark Iron':
-        power -= dark_iron_sword_power
