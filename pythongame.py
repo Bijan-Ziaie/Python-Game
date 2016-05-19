@@ -9,7 +9,7 @@ global gold
 global power
 global chest
 global sword
-health = 100
+health = 90
 gold = 100
 power = 10
 chest = 'None'
@@ -81,6 +81,7 @@ def town():
         print ("That wasnt an answer choice, please answer 1, 2, or 3")
         wait()
         town()
+        
 def shop():
     print ("Gold: ", gold)
     print ("Here is our inventory:")
@@ -124,6 +125,7 @@ iron_sword_value = 200
 iron_sword_power = 30
 dark_iron_sword_value = 2500
 dark_iron_sword_power = 100
+
 def bronze_chest():
     global power
     global gold
@@ -226,8 +228,79 @@ def dark_iron_sword():
         wait()
         shop()
         
+potion1val = 50
+potion2val = 200
+potion3val = 250
+potion1heal = 10
+potion2heal = 40
+potion3heal = 100
+
 def restore():
-    print ("Filler function....")
+    global gold
+    global health
+    print ("Gold: ", gold)
+    print ("Here is our inventory:")
+    print("1.Healing Potion LVL I:\n\tCost: ", potion1val, "g\n\tHealing Power: +", potion1heal, sep='')
+    print("2.Healing Potion LVL II:\n\tCost: ", potion2val, "g\n\tHealing Power: +", potion2heal, sep='')
+    print("3.Healing Potion LVL III:\n\tCost: ", potion3val, "g\n\tHealing Power: +", potion3heal, sep='')
+    print("4.Exit Shop")
+    answer = int(raw_input("Enter the number of the healing potion you would like to buy: "))
+    if health >= 100:
+        print("Your health is full. You don't need to buy potions.")
+        wait()
+        town()
+    if answer == 1:
+        if gold>=potion1val:
+            print("OK, you have now bought: Healing Potion 1")
+            gold -= potion1val
+            health += potion1heal
+            if health>=100:
+                print("Health is full.")
+                health = 100
+            display()
+            wait()
+            restore()
+        else:
+            print("You do not have enough money to purchase healing potion level 1.")
+            wait()
+            restore()
+    elif answer == 2:
+        if gold>=potion2val:
+            print("OK, you have now bought: Healing Potion 2")
+            gold -= potion2val
+            health += potion2heal
+            if health>=100:
+                print("Health is full.")
+                health = 100
+            display()
+            wait()
+            restore()
+        else:
+            print("You do not have enough money to purchase healing potion level 2.")
+            wait()
+            restore()
+    elif answer == 3:
+        if gold>=potion3val:
+            print("OK, you have now bought: Healing Potion 3")
+            gold -= potion3val
+            health += potion3heal
+            if health>=100:
+                print("Health is full.")
+                health = 100
+            display()
+            wait()
+            restore()
+        else:
+            print("You do not have enough money to purchase healing potion level 3.")
+            wait()
+            restore()
+    elif answer == 4:
+        town()
+    else:
+        print("Invalid Input. Please try again.")
+        wait()
+        restore()
+    
 def forest():
     print ("Your in a forest")
     wait()
