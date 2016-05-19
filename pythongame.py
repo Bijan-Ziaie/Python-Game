@@ -2,14 +2,18 @@ from __future__ import print_function
 import random as r
 import numpy
 import time
-import msvcrt as m
+#import msvcrt as m
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
 global health 
 global gold 
 global power
+global chest
+global sword
 health = 100
-gold = 0
+gold = 100
 power = 10
+chest = 'None'
+sword = 'None'
 def wait():
     raw_input("Press Enter to continue...")
 def start():
@@ -58,7 +62,8 @@ def choose_path_2():
         choose_path_2()
     
 def town():
-    print ("You're in a town. \nHealth: ", health,"\nPower: ",power,"\nGold: ", gold)
+    print("You're in a town.")
+    display()
     answer = str(raw_input("What would you like to do? Your choices are :\n1.Buy better weapons or armor\n2.Pay to restore health\n3.Leave the town\nEnter which number choice you want: ")).lower()
     if answer == '1':
         print ("You are going to the shop....")
@@ -78,8 +83,16 @@ def town():
         town()
 def shop():
     print ("Gold: ", gold)
-    print ("Here is our inventory: \n1.Bronze Chestpiece-Cost: ",bronze_chest_value,"g, gives +10 power\n2.Iron Chestpiece-Cost:200g, gives +30 power\n3.Dark Iron Chestpiece-Cost: 2500g, gives +75 power\n4.Bronze Sword-Cost: 50g, gives +10 power\n5.Iron Sword-Cost:200g, gives +30 power\n6.Dark Iron Sword-Cost: 2500g, gives +100 power")
-    answer = int(raw_input("Enter the number of the piece of equipment you would like to buy, if you dont want to buy anything, enter the number '7' : "))
+    print ("Here is our inventory:")
+    print("1.Bronze Chestpiece:\n\tCost: ", bronze_chest_value, "g\n\tPower: +", bronze_chest_power, sep='')
+    print("2.Iron Chestpiece:\n\tCost: ", iron_chest_value, "g\n\tPower: +", iron_chest_value, sep='')
+    print("3.Dark Iron Chestpiece:\n\tCost: ", dark_iron_chest_value, "g\n\tPower: +", dark_iron_chest_power, sep='')
+    print("___________________")
+    print("4.Bronze Sword:\n\tCost: ", bronze_sword_value, "g\n\tPower: +", bronze_sword_power, sep='')
+    print("5.Iron Sword:\n\tCost: ", iron_sword_value, "g\n\tPower: +", iron_sword_power, sep='')
+    print("6.Dark Iron Sword:\n\tCost: ", dark_iron_sword_value, "g\n\tPower: +", dark_iron_sword_power, sep='')
+    print("7.Exit Shop")
+    answer = int(raw_input("Enter the number of the piece of equipment you would like to buy: "))
     if answer == 1:
         bronze_chest()
     elif answer == 2:
@@ -94,6 +107,11 @@ def shop():
         dark_iron_sword()
     elif answer == 7:
         town()
+    else:
+        print("Invalid Input. Please try again.")
+        wait()
+        shop()
+        
 bronze_chest_value = 50
 bronze_chest_power = 10
 iron_chest_value = 200
@@ -107,10 +125,107 @@ iron_sword_power = 30
 dark_iron_sword_value = 2500
 dark_iron_sword_power = 100
 def bronze_chest():
+    global power
+    global gold
+    global chest
     if gold >=bronze_chest_value:
-        print ("OK, you have now bought : Bronze Chestpiece")
+        print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_chest_power
-        bronze_chest_boo = True
+        gold -= bronze_chest_value
+        chest = 'Bronze'
+        display()
+        wait()
+        shop()
+    else:
+        print("You do not have enough money to purchase the bronze chest.")
+        wait()
+        shop()
+        
+def iron_chest():
+    global power
+    global gold
+    global chest
+    if gold >=iron_chest_value:
+        print ("OK, you have now bought: Iron Chestpiece")
+        power += iron_chest_power
+        gold -= iron_chest_value
+        chest = 'Iron'
+        display()
+        wait()
+        shop()
+    else:
+        print("You do not have enough money to purchase the iron chest.")
+        wait()
+        shop()
+        
+def dark_iron_chest():
+    global power
+    global gold
+    global chest
+    if gold >=iron_chest_value:
+        print ("OK, you have now bought: Dark Iron Chestpiece")
+        power += dark_iron_chest_power
+        gold -= dark_iron_chest_value
+        chest = 'Dark Iron'
+        display()
+        wait()
+        shop()
+    else:
+        print("You do not have enough money to purchase the dark iron chest.")
+        wait()
+        shop()
+        
+def bronze_sword():
+    global power
+    global gold
+    global sword
+    if gold >=bronze_sword_value:
+        print ("OK, you have now bought: Bronze Chestpiece")
+        power += bronze_sword_power
+        gold -= bronze_sword_value
+        sword = 'Bronze'
+        display()
+        wait()
+        shop()
+    else:
+        print("You do not have enough money to purchase the bronze sword.")
+        wait()
+        shop()
+
+def iron_sword():
+    global power
+    global gold
+    global sword
+    if gold >=iron_sword_value:
+        print ("OK, you have now bought: Bronze Chestpiece")
+        power += iron_sword_power
+        gold -= iron_sword_value
+        sword = 'Iron'
+        display()
+        wait()
+        shop()
+    else:
+        print("You do not have enough money to purchase the iron sword.")
+        wait()
+        shop()
+        
+def dark_iron_sword():
+    global power
+    global gold
+    global sword
+    if gold >=dark_iron_sword_value:
+        print ("OK, you have now bought: Bronze Chestpiece")
+        power += dark_iron_sword_power
+        gold -= dark_iron_sword_value
+        sword = 'Dark Iron'
+        display()
+        wait()
+        shop()
+    else:
+        print("You do not have enough money to purchase the dark iron sword.")
+        wait()
+        shop()
+        
 def restore():
     print ("Filler function....")
 def forest():
@@ -129,3 +244,6 @@ def treasure_chest():
     print ("Your new gold total is ", gold)
 def dragon_fight():
     print ("Your fighting a dragon")
+
+def display():
+    print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
