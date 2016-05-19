@@ -2,7 +2,6 @@ from __future__ import print_function
 import random as r
 import numpy
 import time
-#import msvcrt as m
 print ("If you want to play, type \nstart()\nBE CAREFUL: IF YOU CLICK RUN, ALL YOUR PROGRESS WILL BE WIPED")
 global health 
 global gold 
@@ -87,6 +86,7 @@ def town():
         town()
         
 def shop():
+    print("WARNING: IF YOU BUY THE SAME ITEM AGAIN, YOU WILL LOOSE GOLD BUT YOU WILL NOT GAIN ANY POWER")
     print ("Gold: ", gold)
     print ("Here is our inventory:")
     print("1.Bronze Chestpiece:\n\tCost: ", bronze_chest_value, "g\n\tPower: +", bronze_chest_power, sep='')
@@ -138,6 +138,7 @@ def bronze_chest():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_chest_power
         gold -= bronze_chest_value
+        fixpower()
         chest = 'Bronze'
         display()
         wait()
@@ -155,6 +156,7 @@ def iron_chest():
         print ("OK, you have now bought: Iron Chestpiece")
         power += iron_chest_power
         gold -= iron_chest_value
+        fixpower()
         chest = 'Iron'
         display()
         wait()
@@ -172,6 +174,7 @@ def dark_iron_chest():
         print ("OK, you have now bought: Dark Iron Chestpiece")
         power += dark_iron_chest_power
         gold -= dark_iron_chest_value
+        fixpower()
         chest = 'Dark Iron'
         display()
         wait()
@@ -189,6 +192,7 @@ def bronze_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += bronze_sword_power
         gold -= bronze_sword_value
+        fixpowersword()
         sword = 'Bronze'
         display()
         wait()
@@ -206,6 +210,7 @@ def iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += iron_sword_power
         gold -= iron_sword_value
+        fixpowersword()
         sword = 'Iron'
         display()
         wait()
@@ -223,6 +228,7 @@ def dark_iron_sword():
         print ("OK, you have now bought: Bronze Chestpiece")
         power += dark_iron_sword_power
         gold -= dark_iron_sword_value
+        fixpowersword()
         sword = 'Dark Iron'
         display()
         wait()
@@ -329,3 +335,21 @@ def dragon_fight():
     print ("Your fighting a dragon")
 def display():
     print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
+def fixpower():
+    global power
+    global chest
+    if chest == 'Bronze':
+        power -= bronze_chest_power
+    elif chest == 'Iron':
+        power -= iron_chest_power
+    elif chest == 'Dark Iron':
+        power -= dark_iron_chest_power
+def fixpowersword():
+    global power
+    global sword
+    if sword == 'Bronze':
+        power -= bronze_sword_power
+    elif sword == 'Iron':
+        power -= iron_sword_power
+    elif sword == 'Dark Iron':
+        power -= dark_iron_sword_power
