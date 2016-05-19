@@ -340,7 +340,7 @@ def monster_even():
     choice = int(raw_input("1.Fight round by round\n2.Skip to end\nChoice: "))
     if choice == 2:
         shdwait = False;
-    elif choice != 1 or choice != 2:
+    elif choice != 1 and choice != 2:
         print("Invalid Input, please enter again")
         monster_even()
     while health > 0 and mon_even_health > 0:
