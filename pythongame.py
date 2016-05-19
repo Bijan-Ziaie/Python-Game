@@ -14,6 +14,10 @@ gold = 100
 power = 10
 chest = 'None'
 sword = 'None'
+global monster_power_even
+global monster_health_even
+global monster_power_odd
+global monster_health_odd
 def wait():
     raw_input("Press Enter to continue...")
 def start():
@@ -305,18 +309,23 @@ def forest():
     print ("Your in a forest")
     wait()
     monster_num = r.randint(1,100)
-    print ("The number it picked was : ",monster_num)
     if monster_num == 1:
         treasure_chest()
     elif monster_num%2 == 0:
         monster_even()
+    elif monster_num%2 == 1 and not monster_num == 1:
+        monster_odd()
+def monster_even():
+    global monster_power_even
+    global monster_health_even
 def treasure_chest():
     global gold
     print ("YOU FOUND A TREASURE!!!!!!!!!")
     gold += 500
     print ("Your new gold total is ", gold)
+    wait()
+    forest()
 def dragon_fight():
     print ("Your fighting a dragon")
-
 def display():
     print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
