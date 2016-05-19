@@ -10,7 +10,7 @@ global sword
 global shdwait
 shdwait = True
 health = 100
-gold = 100
+gold = 0
 power = 10
 chest = 'None'
 sword = 'None'
