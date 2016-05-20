@@ -8,6 +8,8 @@ global power
 global chest
 global sword
 global shdwait
+global dragonlive
+dragonlive = True
 shdwait = True
 health = 100
 gold = 100
@@ -18,6 +20,8 @@ global mon_even_pow
 global mon_even_health
 global mon_odd_pow
 global mon_odd_health
+global drag_pow
+global drag_health
 
 def wait():
     global shdwait
@@ -39,18 +43,22 @@ def begin():
     wait()
     choose_path()
 def choose_path():
-    if power >= 100:
-        dungeon_answer = str(raw_input("You have enough power to try and fight the DRAGON for his gold. He could have up to 1000 gold coins. \n Be careful, he is very strong....\n Would you like to try and defeat him? : ")).lower()
-        if dungeon_answer == 'yes':
-            dragon_fight()
-        elif dungeon_answer == 'no':
-            print ("Okay you can try again the next time you are deciding where to go")
-            wait()
-            choose_path_2()
+    global dragonlive
+    if dragonlive == True:
+        if power >= 100:
+            dungeon_answer = str(raw_input("You have enough power to try and fight the DRAGON for his gold. He could have up to 1000 gold coins. \n Be careful, he is very strong....\n Would you like to try and defeat him? : ")).lower()
+            if dungeon_answer == 'yes':
+                dragon_fight()
+            elif dungeon_answer == 'no':
+                print ("Okay you can try again the next time you are deciding where to go")
+                wait()
+                choose_path_2()
+            else:
+                print ("That wasnt an answer choice, please answer yes or no")
+                wait()
+                choose_path()
         else:
-            print ("That wasnt an answer choice, please answer yes or no")
-            wait()
-            choose_path()
+            choose_path_2()
     else:
         choose_path_2()
 def choose_path_2():
@@ -360,8 +368,8 @@ def monster_even():
             print("Your attack missed!")
             wait()
         if mon_hit != 4 and mon_hit != 3:
-            health -= (power/20.)
-            mon_dmg = (power/20.)
+            health -= (mon_even_pow/20.)
+            mon_dmg = (mon_even_pow/20.)
             print ("The small monster did ",mon_dmg," damage to you")
             wait()
         else:
@@ -417,8 +425,8 @@ def monster_odd():
             print("Your attack missed!")
             wait()
         if mon_hit != 6:
-            health -= (5/3)(power/20.)
-            mon_dmg = (5/3)(power/20.)
+            health -= (5/3)(mon_odd_pow/20.)
+            mon_dmg = (5/3)(mon_odd_pow/20.)
             print ("The large monster did ",mon_dmg," damage to you")
             wait()
     shdwait = True
@@ -440,8 +448,79 @@ def treasure_chest():
     gold += 500
     print ("Your new gold total is ", gold)
 def dragon_fight():
-    print ("Your fighting a dragon")
-
+    global power
+    global health
+    global gold
+    global shdwait
+    global drag_health
+    global drag_pow
+    print ("THE DRAGON HAS DESCENDED FROM HIS MOUNTAIN!!!!!\nHE CAN CAST MYSTERIOUS SPELLS THAT ALTER THE GAME")
+    wait()
+    drag_health = health*1.5
+    drag_pow = power*0.75
+    while health > 0 and drag_health > 0:
+        player_hit = r.randint(1,5)
+        drag_hit = r.randint(1,5)
+        print("DRAGON Health: ", drag_health)
+        print("Your Health: ", health)
+        wait()
+        if player_hit != 4:
+            drag_health -= 5*(power/20.)
+            dmg = 5*(power/20.)
+            print ("You did ",dmg," damage to the dragon")
+            wait()
+        else:
+            print("Your attack missed!")
+            wait()
+        if drag_hit != 6:
+            health -= (5*0.75)(drag_pow/20.)
+            drag_dmg = (5*0.75)(drag_pow/20.)
+            print ("The dragon did ",drag_dmg," damage to you")
+            wait()
+        drag_suicide = r.randint(1,100)
+        drag_fireball = r.randint(1,20)
+        drag_heal = r.randint(1,30)
+        if drag_fireball%2 == 0:
+            health -= 5(drag_pow/20.)
+            fireballdmg = 5(drag_pow/20.)
+            print ("The dragon cast a fireball and hit you for ",fireballdmg,"!")
+            wait()
+        else:
+            drag_health -= 5(drag_pow/20.)
+            fireballdmg = 5(drag_pow/20.)
+            print ("The dragon cast a fireball but you deflected it onto him for ", fireballdmg,"!")
+            wait()
+        if drag_heal in range(1,10):
+            drag_health += 15
+            if drag_health > 150:
+                drag_health -= (drag_health-150)
+            print ("The dragon cast a spell and restored his health by 15!")
+            wait()
+        if drag_heal in range(11,20):
+            health += 15
+            if health > 100:
+                health -= (health-100)
+            print ("The dragon cast a spell but accidentally healed you instead of him for 15!")
+            wait()
+        else:
+            print ("The dragon tried to cast a healing spell but failed! What a dumb dragon!")
+            wait()
+        if drag_suicide == 1:
+            drag_health = 0
+            print ("THE DRAGON TRIED TO END THE WORLD BUT CAST THE SPELL AGAINST HIMSELF ACCIDENTALLY!!!\nHE KILLED HIMSELF!")
+    if health <= 0:
+        print ("You lose!")
+        wait()
+        print ("You can try again next time Mr.Alleman")
+        print ("You have to click run again")
+    if drag_health <= 0:
+        print ("You won!")
+        gold += 1000
+        wait()
+        display()
+        wait()
+        choose_path()
+    
 def display():
     print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
 
