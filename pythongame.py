@@ -25,7 +25,7 @@ global drag_health
 
 def wait():
     global shdwait
-    if shdwait:
+    if shdwait == True:
         raw_input("Press Enter to continue...")
 def start():
     print ("Welcome Adventurer")
@@ -387,7 +387,11 @@ def monster_even():
         wait()
         display()
         wait()
-        choose_path()
+        newchoice = raw_input("Do you want to stay in the forest?: ").lower()
+        if newchoice == 'yes':
+            forest()
+        else:
+            choose_path()
 def monster_odd():
     global mon_odd_pow
     global mon_odd_health
@@ -439,7 +443,11 @@ def monster_odd():
         wait()
         display()
         wait()
-        choose_path()
+        newchoice = raw_input("Do you want to stay in the forest?: ").lower()
+        if newchoice == 'yes':
+            forest()
+        else:
+            choose_path()
 def treasure_chest():
     global gold
     print ("YOU FOUND A TREASURE!!!!!!!!!")
