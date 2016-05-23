@@ -110,17 +110,17 @@ def shop():
     print("7.Exit Shop")
     answer = int(raw_input("Enter the number of the piece of equipment you would like to buy: "))
     if answer == 1:
-        bronze_chest()
-    elif answer == 2:
-        iron_chest()
-    elif answer == 3:
-        dark_iron_chest()
-    elif answer == 4:
         bronze_sword()
-    elif answer == 5:
+    elif answer == 2:
         iron_sword()
-    elif answer == 6:
+    elif answer == 3:
         dark_iron_sword()
+    elif answer == 4:
+        bronze_chest()
+    elif answer == 5:
+        iron_chest()
+    elif answer == 6:
+        dark_iron_chest()
     elif answer == 7:
         town()
     else:
@@ -324,7 +324,6 @@ def restore():
     
 def forest():
     monster_num = r.randint(1,100)
-    print ("The number it picked was : ",monster_num)
     if monster_num == 1:
         treasure_chest()
     elif monster_num%2 == 0:
@@ -342,7 +341,7 @@ def monster_even():
     mon_even_health = health/5
     print ("You found a small monster!")
     wait()
-    print("Do you want to go through the fight round by round, or do you want to skip to the end of the fight.")
+    print("Do you want to go through the fight round by round, or do you want to skip to the end of the fight?\n")
     choice = int(raw_input("1.Fight round by round\n2.Skip to end\nChoice: "))
     if choice == 2:
         shdwait = False;
