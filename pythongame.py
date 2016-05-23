@@ -323,8 +323,6 @@ def restore():
         restore()
     
 def forest():
-    print ("Your in a forest")
-    wait()
     monster_num = r.randint(1,100)
     print ("The number it picked was : ",monster_num)
     if monster_num == 1:
