@@ -12,7 +12,7 @@ global dragonlive
 dragonlive = True
 shdwait = True
 health = 100
-gold = 100
+gold = 0
 power = 10
 chest = 'None'
 sword = 'None'
@@ -397,7 +397,7 @@ def monster_odd():
     global health
     global gold
     global shdwait
-    mon_odd_pow = power/3
+    mon_odd_pow = int(power/3)
     mon_odd_health = health/3
     print ("You found a large monster!")
     wait()
@@ -425,8 +425,8 @@ def monster_odd():
             print("Your attack missed!")
             wait()
         if mon_hit != 6:
-            health -= (5/3)(mon_odd_pow/20.)
-            mon_dmg = (5/3)(mon_odd_pow/20.)
+            health -= (5/3)*(mon_odd_pow/20.)
+            mon_dmg = (5/3)*(mon_odd_pow/20.)
             print ("The large monster did ",mon_dmg," damage to you")
             wait()
     shdwait = True
@@ -473,21 +473,21 @@ def dragon_fight():
             print("Your attack missed!")
             wait()
         if drag_hit != 6:
-            health -= (5*0.75)(drag_pow/20.)
-            drag_dmg = (5*0.75)(drag_pow/20.)
+            health -= (5*0.75)*(drag_pow/20.)
+            drag_dmg = (5*0.75)*(drag_pow/20.)
             print ("The dragon did ",drag_dmg," damage to you")
             wait()
         drag_suicide = r.randint(1,100)
         drag_fireball = r.randint(1,20)
         drag_heal = r.randint(1,30)
         if drag_fireball%2 == 0:
-            health -= 5(drag_pow/20.)
-            fireballdmg = 5(drag_pow/20.)
+            health -= 5*(drag_pow/20.)
+            fireballdmg = 5*(drag_pow/20.)
             print ("The dragon cast a fireball and hit you for ",fireballdmg,"!")
             wait()
         else:
-            drag_health -= 5(drag_pow/20.)
-            fireballdmg = 5(drag_pow/20.)
+            drag_health -= 5*(drag_pow/20.)
+            fireballdmg = 5*(drag_pow/20.)
             print ("The dragon cast a fireball but you deflected it onto him for ", fireballdmg,"!")
             wait()
         if drag_heal in range(1,10):
