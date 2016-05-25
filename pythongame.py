@@ -452,6 +452,8 @@ def treasure_chest():
     print ("YOU FOUND A TREASURE!!!!!!!!!")
     gold += 500
     print ("Your new gold total is ", gold)
+    wait()
+    forest()
 def dragon_fight():
     global power
     global health
