@@ -363,8 +363,6 @@ def monster_even():
     while health > 0 and mon_even_health > 0:
         player_hit = r.randint(1,5)
         mon_hit = r.randint(1,5)
-        print(player_hit)
-        print(mon_hit)
         print("Monster Health: ", mon_even_health)
         print("Your Health: ", health)
         wait()
@@ -424,8 +422,6 @@ def monster_odd():
     while health > 0 and mon_odd_health > 0:
         player_hit = r.randint(1,5)
         mon_hit = r.randint(1,5)
-        print(player_hit)
-        print(mon_hit)
         print("Monster Health: ", mon_odd_health)
         print("Your Health: ", health)
         wait()
