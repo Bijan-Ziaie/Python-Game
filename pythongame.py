@@ -12,7 +12,7 @@ global dragonlive
 dragonlive = True
 shdwait = True
 health = 100
-gold = 0
+gold = 500
 power = 10
 chest = 'None'
 sword = 'None'
@@ -43,37 +43,45 @@ def begin():
     wait()
     choose_path()
 def choose_path():
-    global dragonlive
-    if dragonlive == True:
-        if power >= 100:
-            dungeon_answer = str(raw_input("You have enough power to try and fight the DRAGON for his gold. He could have up to 1000 gold coins. \n Be careful, he is very strong....\n Would you like to try and defeat him? : ")).lower()
-            if dungeon_answer == 'yes':
-                dragon_fight()
-            elif dungeon_answer == 'no':
-                print ("Okay you can try again the next time you are deciding where to go")
-                wait()
-                choose_path_2()
+    try:
+        global dragonlive
+        if dragonlive == True:
+            if power >= 100:
+                dungeon_answer = str(raw_input("You have enough power to try and fight the DRAGON for his gold. He could have up to 1000 gold coins. \n Be careful, he is very strong....\n Would you like to try and defeat him? : ")).lower()
+                if dungeon_answer == 'yes':
+                    dragon_fight()
+                elif dungeon_answer == 'no':
+                    print ("Okay you can try again the next time you are deciding where to go")
+                    wait()
+                    choose_path_2()
+                else:
+                    print ("That wasnt an answer choice, please answer yes or no")
+                    wait()
+                    choose_path()
             else:
-                print ("That wasnt an answer choice, please answer yes or no")
-                wait()
-                choose_path()
+                choose_path_2()
         else:
             choose_path_2()
-    else:
-        choose_path_2()
+    except:
+        print("Incorrect Input")
+        choose_path()
 def choose_path_2():
-    answer = str(raw_input("Where would you like to go now?\nIn 'town',you can buy items which increase your power or pay a fee to heal yourself\nIn 'forest', you can battle monsters and take their gold or possibly discover treasure...\nYour Choice: ")).lower()
-    if answer == 'town':
-        print ("You're going to the town")
-        wait()
-        town()
-    elif answer == 'forest':
-        print ("You're going to the forest")
-        wait()
-        forest()
-    else:
-        print ("Please choose a correct location or re-type your answer in case you mistyped")
-        wait()
+    try:
+        answer = str(raw_input("Where would you like to go now?\nIn 'town',you can buy items which increase your power or pay a fee to heal yourself\nIn 'forest', you can battle monsters and take their gold or possibly discover treasure...\nYour Choice: ")).lower()
+        if answer == 'town':
+            print ("You're going to the town")
+            wait()
+            town()
+        elif answer == 'forest':
+            print ("You're going to the forest")
+            wait()
+            forest()
+        else:
+            print ("Please choose a correct location or re-type your answer in case you mistyped")
+            wait()
+            choose_path_2()
+    except:
+        print("Error Input")
         choose_path_2()
     
 def town():
@@ -457,7 +465,7 @@ def treasure_chest():
     gold += 500
     print ("Your new gold total is ", gold)
     wait()
-    forest()
+    forest()      
 def dragon_fight():
     global power
     global health
@@ -524,7 +532,7 @@ def dragon_fight():
         wait()
         print ("You can try again next time Mr.Alleman")
         print ("You have to click run again")
-    if drag_health <= 0:
+    if drag_health <= 0 and health > 0:
         print ("You won!")
         gold += 1000
         wait()
