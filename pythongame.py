@@ -96,38 +96,6 @@ def town():
         print ("That wasnt an answer choice, please answer 1, 2, or 3")
         wait()
         town()
-        
-def shop():
-    print ("Gold: ", gold)
-    print ("Here is our inventory:")
-    print("1.Bronze Sword:\n\tCost: ", bronze_sword_value, "g\n\tPower: +", bronze_sword_power, sep='')
-    print("2.Iron Sword:\n\tCost: ", iron_sword_value, "g\n\tPower: +", iron_sword_power, sep='')
-    print("3.Dark Iron Sword:\n\tCost: ", dark_iron_sword_value, "g\n\tPower: +", dark_iron_sword_power, sep='')
-    print("___________________")
-    print("4.Bronze Chestpiece:\n\tCost: ", bronze_chest_value, "g\n\tPower: +", bronze_chest_power, sep='')
-    print("5.Iron Chestpiece:\n\tCost: ", iron_chest_value, "g\n\tPower: +", iron_chest_power, sep='')
-    print("6.Dark Iron Chestpiece:\n\tCost: ", dark_iron_chest_value, "g\n\tPower: +", dark_iron_chest_power, sep='')
-    print("7.Exit Shop")
-    answer = int(raw_input("Enter the number of the piece of equipment you would like to buy: "))
-    if answer == 1:
-        bronze_sword()
-    elif answer == 2:
-        iron_sword()
-    elif answer == 3:
-        dark_iron_sword()
-    elif answer == 4:
-        bronze_chest()
-    elif answer == 5:
-        iron_chest()
-    elif answer == 6:
-        dark_iron_chest()
-    elif answer == 7:
-        town()
-    else:
-        print("Invalid Input. Please try again.")
-        wait()
-        shop()
-        
 bronze_chest_value = 50
 bronze_chest_power = 10
 iron_chest_value = 200
@@ -139,7 +107,43 @@ bronze_sword_power = 10
 iron_sword_value = 200
 iron_sword_power = 30
 dark_iron_sword_value = 2500
-dark_iron_sword_power = 100
+dark_iron_sword_power = 100        
+def shop():
+    try:
+        print ("Gold: ", gold)
+        print ("Here is our inventory:")
+        print("1.Bronze Sword:\n\tCost: ", bronze_sword_value, "g\n\tPower: +", bronze_sword_power, sep='')
+        print("2.Iron Sword:\n\tCost: ", iron_sword_value, "g\n\tPower: +", iron_sword_power, sep='')
+        print("3.Dark Iron Sword:\n\tCost: ", dark_iron_sword_value, "g\n\tPower: +", dark_iron_sword_power, sep='')
+        print("___________________")
+        print("4.Bronze Chestpiece:\n\tCost: ", bronze_chest_value, "g\n\tPower: +", bronze_chest_power, sep='')
+        print("5.Iron Chestpiece:\n\tCost: ", iron_chest_value, "g\n\tPower: +", iron_chest_power, sep='')
+        print("6.Dark Iron Chestpiece:\n\tCost: ", dark_iron_chest_value, "g\n\tPower: +", dark_iron_chest_power, sep='')
+        print("7.Exit Shop")
+        answer = int(raw_input("Enter the number of the piece of equipment you would like to buy: "))
+        if answer == 1:
+            bronze_sword()
+        elif answer == 2:
+            iron_sword()
+        elif answer == 3:
+            dark_iron_sword()
+        elif answer == 4:
+            bronze_chest()
+        elif answer == 5:
+            iron_chest()
+        elif answer == 6:
+            dark_iron_chest()
+        elif answer == 7:
+            town()
+        else:
+            print("Invalid Input. Please try again.")
+            wait()
+            shop()
+    except ValueError:
+        print('Invalid Input. Please try again.')
+        shop()
+        
+
 
 def bronze_chest():
     global power
