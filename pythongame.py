@@ -105,7 +105,7 @@ def shop():
     print("3.Dark Iron Sword:\n\tCost: ", dark_iron_sword_value, "g\n\tPower: +", dark_iron_sword_power, sep='')
     print("___________________")
     print("4.Bronze Chestpiece:\n\tCost: ", bronze_chest_value, "g\n\tPower: +", bronze_chest_power, sep='')
-    print("5.Iron Chestpiece:\n\tCost: ", iron_chest_value, "g\n\tPower: +", iron_chest_value, sep='')
+    print("5.Iron Chestpiece:\n\tCost: ", iron_chest_value, "g\n\tPower: +", iron_chest_power, sep='')
     print("6.Dark Iron Chestpiece:\n\tCost: ", dark_iron_chest_value, "g\n\tPower: +", dark_iron_chest_power, sep='')
     print("7.Exit Shop")
     answer = int(raw_input("Enter the number of the piece of equipment you would like to buy: "))
