@@ -434,8 +434,8 @@ def monster_odd():
             print("Your attack missed!")
             wait()
         if mon_hit != 6:
-            health -= (5/3)*(mon_odd_pow/20.)
-            mon_dmg = (5/3)*(mon_odd_pow/20.)
+            health -= (5/3.)*(mon_odd_pow/20.)
+            mon_dmg = (5/3.)*(mon_odd_pow/20.)
             print ("The large monster did ",mon_dmg," damage to you")
             wait()
     shdwait = True
