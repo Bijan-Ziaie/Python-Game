@@ -23,7 +23,7 @@ sword = 'None'
 xptonextlevel = 100
 xp = 0
 level = 1
-skillpoints = 1
+skillpoints = 0
 global mon_even_pow
 global mon_even_health
 global mon_odd_pow
@@ -290,7 +290,7 @@ def levelSkill():
             if answer1 == 1:
                 town()
             else:
-                levelSkill()
+                levelSkill()     
 potion1val = 50
 potion2val = 200
 potion3val = 250
@@ -566,7 +566,7 @@ def dragon_fight():
         choose_path()
     
 def display():
-    print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword)
+    print("\nHealth:\t", health,"\nPower:\t", power,"\nGold:\t", gold,"\nArmor: \t", chest, "\nSword:\t", sword,"\nLevel: \t", level,"\nCurrent XP: \t",xp,"\nXP to next level: \t", xptonextlevel,"\nCurrent Skill Points: \t", skillpoints)
 
 def chestfixpower():
     global chest
