@@ -9,6 +9,10 @@ global chest
 global sword
 global shdwait
 global dragonlive
+global xptonextlvl
+global xp
+global level
+global skillpoints
 dragonlive = True
 shdwait = True
 health = 100
@@ -16,6 +20,10 @@ gold = 0
 power = 10
 chest = 'None'
 sword = 'None'
+xptonextlevel = 100
+xp = 0
+level = 1
+skillpoints = 1
 global mon_even_pow
 global mon_even_health
 global mon_odd_pow
@@ -92,7 +100,7 @@ def choose_path_2():
 def town():
     print("You're in a town.")
     display()
-    answer = str(raw_input("What would you like to do? Your choices are :\n1.Buy better weapons or armor\n2.Pay to restore health\n3.Leave the town\nEnter which number choice you want: ")).lower()
+    answer = str(raw_input("What would you like to do? Your choices are :\n1.Buy better weapons or armor\n2.Pay to restore health\n3.Leave the town\n4.Increase an attribute with skill points\nEnter which number choice you want: ")).lower()
     if answer == '1':
         print ("You are going to the shop....")
         wait()
@@ -265,7 +273,24 @@ def dark_iron_sword():
         print("You do not have enough money to purchase the dark iron sword.")
         wait()
         shop()
-        
+def levelSkill():
+    print("Welcome! Here you can level up your power or learn abilities using skill points earned by leveling up!")
+    if skillpoints == 0:
+            print("You have 0 skill points! You can not buy anything. You will now return to town")
+            wait()
+            town()
+    wait()
+    display()
+    answer = int(raw_input("\nWhat would you like to increase power by 10 points or learn a new ability?\n1.Increase power by 10\n2.Learn a new skill: "))
+    if answer == 1:
+            power += 10
+            skillpoints -= 1
+            display()
+            answer1 = int(raw_input("\nWould you like to stay here or go back to town?\n1.Town\n2.Stay: "))
+            if answer1 == 1:
+                town()
+            else:
+                levelSkill()
 potion1val = 50
 potion2val = 200
 potion3val = 250
@@ -338,7 +363,6 @@ def restore():
         print("Invalid Input. Please try again.")
         wait()
         restore()
-    
 def forest():
     monster_num = r.randint(1,100)
     if monster_num == 1:
